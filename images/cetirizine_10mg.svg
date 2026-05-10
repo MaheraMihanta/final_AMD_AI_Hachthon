@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Cetirizine 10mg</title>
+  <desc id="desc">Image simulee pour le prototype de selection.</desc>
+  <rect width="640" height="360" fill="#f8fafc"/>
+  <circle cx="270" cy="180" r="56" fill="#fef3c7" stroke="#d97706" stroke-width="8"/>
+  <circle cx="370" cy="180" r="56" fill="#fef3c7" stroke="#d97706" stroke-width="8"/>
+  <text x="320" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#111827">MED-004</text>
+</svg>

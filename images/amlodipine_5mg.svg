@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Amlodipine 5mg</title>
+  <desc id="desc">Image simulee pour le prototype de selection.</desc>
+  <rect width="640" height="360" fill="#f9fafb"/>
+  <circle cx="320" cy="180" r="72" fill="#ffedd5" stroke="#ea580c" stroke-width="8"/>
+  <line x1="270" y1="180" x2="370" y2="180" stroke="#ea580c" stroke-width="6"/>
+  <text x="320" y="292" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" fill="#111827">MED-007</text>
+</svg>

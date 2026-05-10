@@ -1,0 +1,2 @@
+# Aucune dependance externe obligatoire pour le mode Cloud.
+# Le serveur web utilise uniquement la bibliotheque standard Python.

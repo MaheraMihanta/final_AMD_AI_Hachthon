@@ -1,0 +1,9 @@
+id_unique,nom,classe_therapeutique,emplacement_rayon,quantite_stock,prix,image_path
+MED-001,Paracetamol 500mg,Antalgique,Rayon A1,120,2500,images/paracetamol_500mg.svg
+MED-002,Ibuprofene 400mg,Anti-inflammatoire,Rayon A2,80,3200,images/ibuprofene_400mg.svg
+MED-003,Amoxicilline 500mg,Antibiotique,Rayon B1,45,7800,images/amoxicilline_500mg.svg
+MED-004,Cetirizine 10mg,Antihistaminique,Rayon B2,60,2900,images/cetirizine_10mg.svg
+MED-005,Omeprazole 20mg,Antiulcereux,Rayon C1,35,4500,images/omeprazole_20mg.svg
+MED-006,Metformine 850mg,Antidiabetique,Rayon C2,95,5200,images/metformine_850mg.svg
+MED-007,Amlodipine 5mg,Antihypertenseur,Rayon D1,70,4100,images/amlodipine_5mg.svg
+MED-008,Vitamine C 1000mg,Supplement,Rayon D2,150,1800,images/vitamine_c_1000mg.svg

@@ -1,0 +1,145 @@
+# Plan d'implementation revise - Gestion Stock Vision
+
+## Objectif du prototype
+
+Construire une chaine de demonstration pour une pharmacie ou un stock medical:
+
+1. recevoir une demande d'article;
+2. verifier le stock;
+3. selectionner l'image associee au produit;
+4. simuler le deplacement du robot vers le bon rayon;
+5. exposer le prototype sur un cloud headless;
+6. preparer le branchement futur avec la vision par ordinateur et l'automatisation.
+
+Le travail demande pour cette part d'equipe concerne l'etape 1: modules 1 et 2.
+
+## Etape 1 - Modules 1 et 2: implementee
+
+### Module 1: gestion de stock
+
+Fichiers crees:
+
+- `data/inventory.csv`: inventaire initial de 8 articles.
+- `app.py`: lecture du CSV, recherche par ID ou nom, controle de quantite, messages d'erreur.
+- `cloud_app.py`: interface web HTTP standard library pour le Cloud AMD headless.
+- `start_cloud.py`: lanceur serveur compatible `HOST` et `PORT`.
+- `gui.py`: interface CustomTkinter optionnelle pour desktop local.
+- `tests/test_stock_simulation.py`: tests des scenarios principaux.
+
+Attributs suivis pour chaque article:
+
+- `id_unique`
+- `nom`
+- `classe_therapeutique`
+- `emplacement_rayon`
+- `quantite_stock`
+- `prix`
+- `image_path`
+
+Scenarios deja couverts:
+
+- article trouve par ID;
+- article trouve par nom partiel unique;
+- article introuvable;
+- quantite invalide;
+- stock insuffisant;
+- image associee manquante.
+
+### Module 2: selection et simulation d'image
+
+Fichiers crees:
+
+- `images/*.svg`: images simulees pour chaque article.
+- la colonne `image_path` du CSV associe chaque article a son image.
+
+Comportement actuel:
+
+- si l'article existe et que le stock suffit, le programme affiche l'image selectionnee;
+- il simule le mouvement avec le message:
+  `Robot allant au compartiment: {emplacement_rayon}`;
+- il s'arrete avant la vision par ordinateur, comme prevu pour cette etape.
+
+Commandes utiles:
+
+```powershell
+python -m pip install -r requirements.txt
+python gui.py
+python app.py --list
+python app.py --query MED-001 --quantity 2
+python app.py --query amoxicilline
+python -m unittest discover -s tests
+```
+
+### Interface cloud retenue
+
+Une interface web basee sur la bibliotheque standard Python est retenue pour
+la version Cloud AMD, car le serveur est headless et ne peut pas ouvrir de
+fenetre Tkinter. Ce choix limite aussi les dependances a installer.
+
+- page web `GET /`: inventaire, demande client, resultat, image et assistant LLM;
+- endpoint `GET /health`: verification du serveur;
+- endpoint `GET /api/inventory`: inventaire JSON;
+- endpoint `POST /api/select`: selection article + point d'appel vision;
+- endpoint `POST /api/assistant`: generation du contexte LLM.
+
+CustomTkinter reste possible en local desktop avec `requirements-desktop.txt`,
+mais il n'est plus dans le chemin principal du projet.
+
+Le LLM ne doit pas delivrer automatiquement un medicament. Il doit aider a
+poser des questions de clarification, resumer les symptomes et laisser la
+validation au pharmacien.
+
+## Etape 2 - Vision par ordinateur: implementee
+
+Le plan initial disait que `yolo11n.pt` etait pret pour detecter des pilules. C'est corrige: les poids generiques ont servi de base, puis un detecteur dedie a ete entraine sur le dataset `pill_data/pill_yolo`.
+
+Fichiers et sorties utiles:
+
+1. `models/pill_detector.pt`: modele exporte pour l'application.
+2. `vision.py`: inference YOLO et filtrage des classes positives.
+3. `start_cloud.py`: configuration par defaut de `PILL_DATASET_DIR`, `VISION_MODEL_PATH` et `VISION_POSITIVE_LABELS`.
+4. `data/inventory.csv`: images d'articles remplacees par des images du split `train/images`.
+5. `scripts/evaluate_pill_detector.py`: generation des plots depuis `results.csv`.
+6. `reports/pill_detector_performance/`: graphiques et resume des performances.
+
+Resultat d'evaluation actuel:
+
+- precision finale: 0.94702;
+- rappel final: 0.93986;
+- meilleur mAP50: 0.96466 a l'epoch 48;
+- meilleur mAP50-95: 0.70187 a l'epoch 50.
+
+Regle de validation actuelle:
+
+- `VISION_OK`: au moins une detection dans les classes positives `Pill Back` ou `Pill Front`;
+- `VISION_KO`: image invalide, modele indisponible, aucune detection, ou detection uniquement dans une classe non positive.
+
+Le stock ne doit toujours etre decremente qu'apres confirmation de la vision.
+
+## Etape 3 - Automatisation
+
+A implementer apres validation de la vision:
+
+- decrementer le stock dans une copie ou une base persistante;
+- journaliser les transactions dans `transactions.csv`;
+- generer des instructions de livraison;
+- conserver les erreurs dans un fichier de logs pour la demonstration.
+
+## Etape 4 - Interface, LLM et demo
+
+Options possibles:
+
+- serveur HTTP Python standard pour la demo cloud actuelle;
+- CustomTkinter uniquement pour demo locale avec affichage;
+- FastAPI ou Streamlit si l'equipe veut plus tard une API ou une demo web plus riche.
+
+Pour le Cloud AMD, le serveur HTTP standard est le meilleur choix actuel:
+il fonctionne sans serveur graphique, expose une interface navigateur et
+prepare les integrations API vision/LLM sans dependance obligatoire.
+
+## Priorites immediates
+
+1. Valider l'etape 2 avec l'equipe depuis l'interface web lancee par `python start_cloud.py`.
+2. Tester plusieurs requetes article -> image -> vision sur les images dataset.
+3. Ajouter ensuite l'automatisation seulement quand la verification image donne un resultat fiable.
+4. Decrementer le stock dans une copie ou une base persistante apres `Vision OK`.

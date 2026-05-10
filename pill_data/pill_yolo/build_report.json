@@ -1,0 +1,12 @@
+{
+  "source_coco_images": 1114,
+  "available_images": 999,
+  "missing_images_skipped": 115,
+  "annotations_seen": 15130,
+  "annotations_skipped": 0,
+  "splits": {
+    "train": 730,
+    "valid": 129,
+    "test": 140
+  }
+}

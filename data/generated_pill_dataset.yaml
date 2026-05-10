@@ -1,0 +1,10 @@
+path: /shared-docker/amd_ai_hackathon/pill_data/pill_yolo
+train: train/images
+val: valid/images
+test: test/images
+names:
+  0: Light Front
+  1: No Pill Back
+  2: No Pill Front
+  3: Pill Back
+  4: Pill Front

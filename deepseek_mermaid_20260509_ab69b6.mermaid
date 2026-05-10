@@ -1,0 +1,39 @@
+flowchart TD
+    A[Interface Web HTTP<br/>Cloud AMD headless] --> A1{Type de demande}
+    A1 -->|Ordonnance ou article connu| B[Module 1: Gestion de stock]
+    A1 -->|Symptomes sans ordonnance| L[Assistant LLM futur]
+    L -->|Resume pour pharmacien| B
+
+    subgraph B [Module 1: Gestion de stock]
+        B1[Charger data/inventory.csv]
+        B2[Rechercher par ID ou nom]
+        B3[Verifier quantite disponible]
+    end
+
+    B3 -->|Article trouve et stock suffisant| C[Module 2: Selection image]
+    B3 -->|Article introuvable ou stock insuffisant| F[Fin avec message d'erreur]
+
+    subgraph C [Module 2: Selection et simulation]
+        C1[Lire image_path]
+        C2[Verifier que l'image existe]
+        C3[Simuler le deplacement robot]
+    end
+
+    C3 --> D[Module 3: Vision par ordinateur]
+
+    subgraph D [Module 3: A implementer ensuite]
+        D1[vision.process_image image_path]
+        D2[Modele specialise ou fine-tune]
+        D3[Verdict VISION_OK ou VISION_KO]
+    end
+
+    D3 -->|VISION_OK| E[Module 4: Automatisation]
+    D3 -->|VISION_KO| F
+
+    subgraph E [Module 4: A implementer ensuite]
+        E1[Decrementer le stock]
+        E2[Journaliser la transaction]
+        E3[Generer les instructions de livraison]
+    end
+
+    E --> F[Fin du processus]

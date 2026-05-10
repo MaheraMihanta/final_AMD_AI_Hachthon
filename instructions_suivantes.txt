@@ -1,0 +1,4 @@
+J'ai réussi à entraîner un modèle de vision par ordinateur pour ce projet d'automatisation d'une pharmacie, le but est de faire prendre à un robot le médicament en question dans le stock, par une requête du pharmacien/vendeur. Servez-vous des des fichiers Readme, et des fichiers au format .txt dans le répertoire pour la suite, dont voici les instructions :
+1. Evaluez la performance de ce modèle de vision, il y a le dossier runs, dans lequel je crois contient les résultats des métriques. faites des plots pour la performance
+2.Intégrez ce modèle à l'agent, au start_cloud.py, et faites en sorte que les images utilisé soient parmi celle avec lesquelles on a entraîné le modèle, elles se trouvent dans E:\THESE\Projet_Njara_tafita\amd_ai_hackathon\pill_data\pill_yolo
+

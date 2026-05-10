@@ -1,0 +1,9 @@
+id_unique,nom,classe_therapeutique,emplacement_rayon,quantite_stock,prix,image_path
+MED-001,Paracetamol 500mg,Antalgique,Rayon A1,120,2500,pill_data/pill_yolo/train/images/01-07-pill-100_jpg.rf.002efc3a64865e2eecf971389a60cf44.jpg
+MED-002,Ibuprofene 400mg,Anti-inflammatoire,Rayon A2,80,3200,pill_data/pill_yolo/train/images/01-07-pill-101_jpg.rf.f04e6301c51a595b8cc9edfc36f05038.jpg
+MED-003,Amoxicilline 500mg,Antibiotique,Rayon B1,45,7800,pill_data/pill_yolo/train/images/01-07-pill-102_jpg.rf.47ccd513238ca981d8c72990eff02ace.jpg
+MED-004,Cetirizine 10mg,Antihistaminique,Rayon B2,60,2900,pill_data/pill_yolo/train/images/01-07-pill-103_jpg.rf.09b990099c229dea647363af8eb366c5.jpg
+MED-005,Omeprazole 20mg,Antiulcereux,Rayon C1,35,4500,pill_data/pill_yolo/train/images/01-07-pill-104_jpg.rf.2bc91afbfc6a0354788f77371f5d13a0.jpg
+MED-006,Metformine 850mg,Antidiabetique,Rayon C2,95,5200,pill_data/pill_yolo/train/images/01-07-pill-105_jpg.rf.5ac2e3dc9391ab401a9266cc8aaaff0c.jpg
+MED-007,Amlodipine 5mg,Antihypertenseur,Rayon D1,70,4100,pill_data/pill_yolo/train/images/01-07-pill-107_jpg.rf.74fc2dd945f639102c007c226c5b06fb.jpg
+MED-008,Vitamine C 1000mg,Supplement,Rayon D2,150,1800,pill_data/pill_yolo/train/images/01-07-pill-108_jpg.rf.dd2443c3fdb88a6a8fe52ad489ab6f7f.jpg
